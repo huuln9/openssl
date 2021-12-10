@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:vncitizens_authentication/src/models/authentication_status.dart';
 import 'package:vncitizens_authentication/src/services/authentication_service.dart';
 
 class AuthenticationController {
