@@ -4,7 +4,7 @@ import 'package:vncitizens_authentication/src/services/authentication_service.da
 
 class AuthenticationController {
   AuthenticationService? _authenticationService;
-  AuthenticationStatus _status = AuthenticationStatus.unauthenticated;
+  var status = AuthenticationStatus.unauthenticated.obs;
   String _accessToken = '';
 
   AuthenticationController({
@@ -21,7 +21,6 @@ class AuthenticationController {
     ));
   }
 
-  AuthenticationStatus get status => _status;
   String get accessToken => _accessToken;
 
   signInWithCredential() async {
@@ -34,12 +33,14 @@ class AuthenticationController {
       username: username,
       password: password,
     );
-    _status = AuthenticationStatus.authenticated;
+    status(AuthenticationStatus.authenticated);
     _accessToken = accessToken;
+
+    Get.back(id: 4);
   }
 
   signOut() {
-    _status = AuthenticationStatus.unauthenticated;
+    status(AuthenticationStatus.unauthenticated);
     _accessToken = '';
   }
 }
