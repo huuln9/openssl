@@ -5,7 +5,7 @@ import 'package:vncitizens_authentication/vncitizens_authentication.dart';
 void main() {
   group("Test authentication module:", () {
     test(
-        "Sign in with client credential: AuthenticationStatus should be unauthenticated",
+        "Sign in with client credential: Authentication status should be unauthenticated",
         () async {
       final authenticationController = AuthenticationController(
         ssoURL: 'https://ssotest.vnptigate.vn',
@@ -16,12 +16,12 @@ void main() {
 
       await authenticationController.signInWithCredential();
 
-      expect(authenticationController.getAccessToken() != '', true);
-      expect(authenticationController.getAuthenticationStatus(),
+      expect(authenticationController.accessToken != '', true);
+      expect(authenticationController.status,
           AuthenticationStatus.unauthenticated);
     });
 
-    test("Sign in with password: AuthenticationStatus should be authenticated",
+    test("Sign in with password: Authentication status should be authenticated",
         () async {
       final authenticationController = AuthenticationController(
         ssoURL: 'https://ssotest.vnptigate.vn',
@@ -33,9 +33,9 @@ void main() {
       await authenticationController.signInWithPassword(
           username: 'admintest', password: 'Vnpt@123');
 
-      expect(authenticationController.getAccessToken() != '', true);
-      expect(authenticationController.getAuthenticationStatus(),
-          AuthenticationStatus.authenticated);
+      expect(authenticationController.accessToken != '', true);
+      expect(
+          authenticationController.status, AuthenticationStatus.authenticated);
     });
   });
 }

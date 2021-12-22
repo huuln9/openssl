@@ -21,8 +21,8 @@ class AuthenticationController {
     ));
   }
 
-  getAuthenticationStatus() => _status;
-  getAccessToken() => _accessToken;
+  AuthenticationStatus get status => _status;
+  String get accessToken => _accessToken;
 
   signInWithCredential() async {
     String accessToken = await _authenticationService!.signInWithCredential();
