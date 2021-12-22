@@ -48,7 +48,7 @@ class AuthenticationController {
 
   signOut() {
     status(AuthenticationStatus.unauthenticated);
-    _accessToken = '';
     process(AuthenticationProcess.init);
+    _accessToken = '';
   }
 }
