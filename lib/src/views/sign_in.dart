@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vncitizens_authentication/src/controllers/authentication_controller.dart';
+import 'package:vncitizens_authentication/vncitizens_authentication.dart';
 
 class SignIn extends GetView<AuthenticationController> {
   final usernameController = TextEditingController();
@@ -48,6 +49,19 @@ class SignIn extends GetView<AuthenticationController> {
               const Padding(padding: EdgeInsets.all(10)),
               _PasswordInput(controller: passwordController),
               const Padding(padding: EdgeInsets.all(15)),
+              Obx(() {
+                switch (controller.process.value) {
+                  case AuthenticationProcess.loading:
+                    return const CircularProgressIndicator();
+                  case AuthenticationProcess.failure:
+                    return const Text(
+                      "Tài khoản hoặc mật khẩu không chính xác!",
+                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    );
+                  default:
+                    return Container();
+                }
+              }),
               const Spacer(),
               ElevatedButton(
                 onPressed: () => controller.signInWithPassword(

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vncitizens_authentication/src/models/authentication_status.dart';
+import 'package:vncitizens_authentication/src/models/models.dart';
 import 'package:vncitizens_authentication/vncitizens_authentication.dart';
 
 void main() {
