@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:vncitizens_authentication/src/models/authentication_status.dart';
+import 'package:vncitizens_authentication/src/models/models.dart';
 import 'package:vncitizens_authentication/src/services/authentication_service.dart';
 
 class AuthenticationController {
   AuthenticationService? _authenticationService;
-  AuthenticationStatus _status = AuthenticationStatus.unauthenticated;
+  var status = AuthenticationStatus.unauthenticated.obs;
+  var process = AuthenticationProcess.init.obs;
   String _accessToken = '';
 
   AuthenticationController({
@@ -21,8 +22,7 @@ class AuthenticationController {
     ));
   }
 
-  getAuthenticationStatus() => _status;
-  getAccessToken() => _accessToken;
+  String get accessToken => _accessToken;
 
   signInWithCredential() async {
     String accessToken = await _authenticationService!.signInWithCredential();
@@ -30,16 +30,25 @@ class AuthenticationController {
   }
 
   signInWithPassword({required username, required password}) async {
-    String accessToken = await _authenticationService!.signInWithPassword(
-      username: username,
-      password: password,
-    );
-    _status = AuthenticationStatus.authenticated;
-    _accessToken = accessToken;
+    process(AuthenticationProcess.loading);
+    try {
+      String accessToken = await _authenticationService!.signInWithPassword(
+        username: username,
+        password: password,
+      );
+      status(AuthenticationStatus.authenticated);
+      _accessToken = accessToken;
+
+      process(AuthenticationProcess.success);
+      Get.back(id: 4);
+    } catch (e) {
+      process(AuthenticationProcess.failure);
+    }
   }
 
   signOut() {
-    _status = AuthenticationStatus.unauthenticated;
+    status(AuthenticationStatus.unauthenticated);
+    process(AuthenticationProcess.init);
     _accessToken = '';
   }
 }
