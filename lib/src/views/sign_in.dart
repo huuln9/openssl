@@ -26,11 +26,11 @@ class SignIn extends GetView<AuthenticationController> {
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Align(
+          title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Đăng nhập",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+              "Sign in".tr,
+              style: const TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),
         ),
@@ -41,9 +41,9 @@ class SignIn extends GetView<AuthenticationController> {
             children: [
               TextField(
                 controller: usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Tài khoản',
-                  hintText: 'Nhập tài khoản đăng ký',
+                decoration: InputDecoration(
+                  labelText: 'Username'.tr,
+                  hintText: 'Enter username'.tr,
                 ),
               ),
               const Padding(padding: EdgeInsets.all(10)),
@@ -54,9 +54,9 @@ class SignIn extends GetView<AuthenticationController> {
                   case AuthenticationProcess.loading:
                     return const CircularProgressIndicator();
                   case AuthenticationProcess.failure:
-                    return const Text(
-                      "Tài khoản hoặc mật khẩu không chính xác!",
-                      style: TextStyle(fontSize: 18, color: Colors.red),
+                    return Text(
+                      "Invalid username or password".tr,
+                      style: const TextStyle(fontSize: 18, color: Colors.red),
                     );
                   default:
                     return Container();
@@ -68,11 +68,11 @@ class SignIn extends GetView<AuthenticationController> {
                   username: usernameController.text,
                   password: passwordController.text,
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Đăng Nhập",
-                    style: TextStyle(fontSize: 18),
+                    "Sign In".tr,
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(fixedSize: const Size(250, 50)),
@@ -80,11 +80,11 @@ class SignIn extends GetView<AuthenticationController> {
               const Padding(padding: EdgeInsets.all(10)),
               ElevatedButton(
                 onPressed: () => {},
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Đăng Ký Tài Khoản",
-                    style: TextStyle(color: Colors.black, fontSize: 18),
+                    "Register Account".tr,
+                    style: const TextStyle(color: Colors.black, fontSize: 18),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -119,8 +119,8 @@ class _PasswordInputState extends State<_PasswordInput> {
       controller: widget.controller,
       obscureText: !_showPassword,
       decoration: InputDecoration(
-        labelText: 'Mật khẩu',
-        hintText: 'Nhập mật khẩu',
+        labelText: 'Password'.tr,
+        hintText: 'Enter password'.tr,
         suffixIcon: IconButton(
             icon: Icon(
               _showPassword ? Icons.visibility : Icons.visibility_off,
