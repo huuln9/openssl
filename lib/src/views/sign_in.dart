@@ -24,7 +24,7 @@ class SignIn extends GetView<AuthenticationController> {
               Icons.arrow_back_ios,
               color: Colors.white,
             ),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => Get.back(id: 4),
           ),
           title: Align(
             alignment: Alignment.centerLeft,
