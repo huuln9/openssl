@@ -4,7 +4,7 @@ final Map<String, String> authenticationViVN = {
   'Sign In': 'Đăng Nhập',
   'Username': 'Tài khoản',
   'Enter username': 'Nhập tài khoản đăng ký',
-  'Register account': 'Đăng Ký Tài Khoản',
+  'Register Account': 'Đăng Ký Tài Khoản',
   'Password': 'Mật khẩu',
   'Enter password': 'Nhập mật khẩu',
 };
