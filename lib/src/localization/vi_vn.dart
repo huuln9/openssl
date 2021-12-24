@@ -1,5 +1,5 @@
 final Map<String, String> authenticationViVN = {
-  'Invalid username or password': 'Tài khoản hoặc mật khẩu không chính xác!',
+  'Invalid username or password!': 'Tài khoản hoặc mật khẩu không chính xác!',
   'Sign in': 'Đăng nhập',
   'Sign In': 'Đăng Nhập',
   'Username': 'Tài khoản',

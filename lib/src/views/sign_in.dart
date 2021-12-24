@@ -36,65 +36,152 @@ class SignIn extends GetView<AuthenticationController> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username'.tr,
-                  hintText: 'Enter username'.tr,
-                ),
-              ),
-              const Padding(padding: EdgeInsets.all(10)),
-              _PasswordInput(controller: passwordController),
-              const Padding(padding: EdgeInsets.all(15)),
-              Obx(() {
-                switch (controller.process.value) {
-                  case AuthenticationProcess.loading:
-                    return const CircularProgressIndicator();
-                  case AuthenticationProcess.failure:
-                    return Text(
-                      "Invalid username or password".tr,
-                      style: const TextStyle(fontSize: 18, color: Colors.red),
-                    );
-                  default:
-                    return Container();
-                }
-              }),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () => controller.signInWithPassword(
-                  username: usernameController.text,
-                  password: passwordController.text,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "Sign In".tr,
-                    style: const TextStyle(fontSize: 18),
+          child: MediaQuery.of(context).size.width > 500
+              ? ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context)
+                      .copyWith(scrollbars: false),
+                  child: ListView(
+                    children: [
+                      TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          labelText: 'Username'.tr,
+                          hintText: 'Enter username'.tr,
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.all(10)),
+                      _PasswordInput(controller: passwordController),
+                      const Padding(padding: EdgeInsets.all(15)),
+                      Obx(() {
+                        switch (controller.process.value) {
+                          case AuthenticationProcess.loading:
+                            return const Padding(
+                              padding: EdgeInsets.only(bottom: 15.0),
+                              child: Center(
+                                child: SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            );
+                          case AuthenticationProcess.failure:
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 15.0),
+                              child: Center(
+                                child: Text(
+                                  "Invalid username or password!".tr,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.red),
+                                ),
+                              ),
+                            );
+                          default:
+                            return Container();
+                        }
+                      }),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => controller.signInWithPassword(
+                            username: usernameController.text,
+                            password: passwordController.text,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Sign In".tr,
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(250, 50)),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.all(10)),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () => {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Register Account".tr,
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            side: const BorderSide(color: Colors.blue),
+                            fixedSize: const Size(250, 50),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                )
+              : Column(
+                  children: [
+                    TextField(
+                      controller: usernameController,
+                      decoration: InputDecoration(
+                        labelText: 'Username'.tr,
+                        hintText: 'Enter username'.tr,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    _PasswordInput(controller: passwordController),
+                    const Padding(padding: EdgeInsets.all(15)),
+                    Obx(() {
+                      switch (controller.process.value) {
+                        case AuthenticationProcess.loading:
+                          return const CircularProgressIndicator();
+                        case AuthenticationProcess.failure:
+                          return Text(
+                            "Invalid username or password!".tr,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.red,
+                            ),
+                          );
+                        default:
+                          return Container();
+                      }
+                    }),
+                    const Spacer(),
+                    ElevatedButton(
+                      onPressed: () => controller.signInWithPassword(
+                        username: usernameController.text,
+                        password: passwordController.text,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Sign In".tr,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 50)),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    ElevatedButton(
+                      onPressed: () => {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Register Account".tr,
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 18),
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        side: const BorderSide(color: Colors.blue),
+                        fixedSize: const Size(250, 50),
+                      ),
+                    ),
+                  ],
                 ),
-                style: ElevatedButton.styleFrom(fixedSize: const Size(250, 50)),
-              ),
-              const Padding(padding: EdgeInsets.all(10)),
-              ElevatedButton(
-                onPressed: () => {},
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "Register Account".tr,
-                    style: const TextStyle(color: Colors.black, fontSize: 18),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  side: const BorderSide(color: Colors.blue),
-                  fixedSize: const Size(250, 50),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

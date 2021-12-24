@@ -1,5 +1,5 @@
 final Map<String, String> authenticationEnUS = {
-  'Invalid username or password': 'Invalid username or password!',
+  'Invalid username or password!': 'Invalid username or password!',
   'Sign in': 'Sign in',
   'Sign In': 'Sign In',
   'Username': 'Username',
