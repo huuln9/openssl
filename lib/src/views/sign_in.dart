@@ -183,6 +183,7 @@ class SignIn extends GetView<AuthenticationController> {
                   ],
                 ),
         ),
+        resizeToAvoidBottomInset: false,
       ),
     );
   }
